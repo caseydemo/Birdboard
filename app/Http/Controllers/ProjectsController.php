@@ -18,9 +18,17 @@ class ProjectsController extends Controller
     /**
      * 
      */
+    public function show(Project $project) {
+        // $project = Project::findOrFail(request('project')); // route model binding?
+        return view('projects.show', compact('project'));
+    }
+
+    /**
+     * 
+     */
     public function store() {
-        request()->validate(['title' => 'required', 'description' => 'required']);
-        Project::create(request(['title', 'description']));
+        $attributes = request()->validate(['title' => 'required', 'description' => 'required']);
+        Project::create($attributes);
         return redirect('/projects');
     }
 }

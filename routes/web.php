@@ -20,14 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// string syntax
-// Route::post('/projects', 'ProjectsController@store');
 
-// action syntax
-Route::post('/projects', [ProjectsController::class, 'store']);
 
 // string syntax
 // Route::get('/projects', 'ProjectsController@index');
 
 // action syntax
 Route::get('/projects', [ProjectsController::class, 'index']);
+
+Route::get('/projects/{project}', [ProjectsController::class, 'show']);
+
+// string syntax
+// Route::post('/projects', 'ProjectsController@store');
+
+// action syntax
+Route::post('/projects', [ProjectsController::class, 'store']);
