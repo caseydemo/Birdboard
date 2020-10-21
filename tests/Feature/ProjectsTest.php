@@ -42,10 +42,17 @@ class ProjectsTest extends TestCase {
     }
 
     /** @test */
+    public function a_project_requires_an_owner() {
+        // $this->withoutExceptionHandling();
+        $attributes = Project::factory('App\Project')->raw();
+        $this->post('/projects', $attributes)->assertSessionHasErrors('owner');
+    }
+
+    /** @test */
     public function a_user_can_view_a_project() {
         $this->withoutExceptionHandling();
         $project = Project::factory('App\Project')->create();
-        $this->get('/projects/' . $project->id)
+        $this->get($project->path())
             ->assertSee($project->title)
             ->assertSee($project->description);
     }
