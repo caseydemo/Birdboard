@@ -26,8 +26,8 @@ class ProjectFactory extends Factory
             'title' =>  $this->faker->word,
             'description'   =>  $this->faker->paragraph,
             'owner_id'  =>  function() {
-                // LEFT OFF HERE 10/20/20
-                // return Project::factory(App\User::class)->create()->id;
+                // dd(Project::factory(App\User::class)->create()->id);
+                return User::factory(App\User::class)->create()->id;
             }  
         ];
     }
