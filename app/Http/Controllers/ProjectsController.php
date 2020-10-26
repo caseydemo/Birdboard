@@ -27,11 +27,16 @@ class ProjectsController extends Controller
      * 
      */
     public function store() {
+
+        dd('poop?');
+
         $attributes = request()->validate([
             'title' => 'required', 
             'description' => 'required',
             'owner_id'  =>  'required'
             ]);
+
+        $attributes['owner_id'] = auth()->id();
         Project::create($attributes);
         return redirect('/projects');
     }

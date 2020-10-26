@@ -34,4 +34,7 @@ Route::get('/projects/{project}', [ProjectsController::class, 'show']);
 // Route::post('/projects', 'ProjectsController@store');
 
 // action syntax
-Route::post('/projects', [ProjectsController::class, 'store']);
+Route::post('/projects', [ProjectsController::class, 'store'])->middleware('auth');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
