@@ -23,7 +23,7 @@ class ProjectsTest extends TestCase {
     /** @test */
     public function a_user_can_create_a_project() {
         
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         // Note - this was another workaround I figured out ON MY OWN 10/28/20
         $user = User::factory('App\User')->create(); // create user and store as variable
