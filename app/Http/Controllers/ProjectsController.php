@@ -28,14 +28,15 @@ class ProjectsController extends Controller
      */
     public function store() {
 
-        dd('poop?');
-
+        
+        // this is causing the error - 10/28/20
         $attributes = request()->validate([
             'title' => 'required', 
             'description' => 'required',
             'owner_id'  =>  'required'
             ]);
 
+        
         $attributes['owner_id'] = auth()->id();
         Project::create($attributes);
         return redirect('/projects');

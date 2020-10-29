@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Project;
 use App\Models\User;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProjectFactory extends Factory
