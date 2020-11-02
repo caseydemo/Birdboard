@@ -34,14 +34,11 @@ class ProjectsController extends Controller
             'title' => 'required', 
             'description' => 'required',
             'owner_id'  =>  'required'
-            ]);
-
-        
-        // $attributes['owner_id'] = auth()->id();
+        ]);
 
         auth()->user()->projects()->create($attributes);
 
-        Project::create($attributes);
+        // Project::create($attributes);
         return redirect('/projects');
     }
 }

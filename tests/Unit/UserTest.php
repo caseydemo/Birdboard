@@ -4,7 +4,8 @@ namespace Tests\Unit;
 
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\Collection;
+// use Illuminate\Foundation\Testing\Collection; // what came out of the box
+use Illuminate\Database\Eloquent\Collection; // *Overridden what this came with out of the box for laravel 8
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Project;
@@ -16,14 +17,10 @@ class UserTest extends TestCase {
 
     use RefreshDatabase, WithFaker;
 
-
-    // LEFT OFF HERE - 10/29/20
-
     /** @test     */
     public function a_user_has_projects() {
         $this->withoutExceptionHandling();
         $user = User::factory('App\User')->create();
-        dd($user);
         $this->assertInstanceOf(Collection::class, $user->projects);
     }
 }
