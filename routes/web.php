@@ -26,7 +26,7 @@ Route::get('/', function () {
 // Route::get('/projects', 'ProjectsController@index');
 
 // action syntax
-Route::get('/projects', [ProjectsController::class, 'index']);
+Route::get('/projects', [ProjectsController::class, 'index'])->middleware('auth');
 
 Route::get('/projects/{project}', [ProjectsController::class, 'show']);
 

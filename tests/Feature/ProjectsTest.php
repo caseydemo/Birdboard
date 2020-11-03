@@ -14,12 +14,26 @@ class ProjectsTest extends TestCase {
     
     
     /** @test */
-    public function only_authenticated_users_can_create_projects() {
+    public function guests_cannot_create_projects() {
         // this->withoutExceptionHandling();
         $attributes = Project::factory('App\Project')->raw();
         $this->post('/projects', $attributes)->assertRedirect('login');
     }
     
+    /** @test */
+    public function guests_cannot_view_projects() {
+        
+        $this->get('/projects')->assertRedirect('login');
+    }
+
+    // left off here 11/1
+
+    /** @test */
+    public function guests_cannot_view_a_single_projects() {
+        
+        $this->get('/projects')->assertRedirect('login');
+    }
+
     /** @test */
     public function a_user_can_create_a_project() {
         
