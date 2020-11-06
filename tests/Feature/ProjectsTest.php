@@ -29,9 +29,9 @@ class ProjectsTest extends TestCase {
     // left off here 11/1
 
     /** @test */
-    public function guests_cannot_view_a_single_projects() {
-        
-        $this->get('/projects')->assertRedirect('login');
+    public function guests_cannot_view_a_single_project() {
+        $project = Project::factory('App\Project')->create();
+        $this->get($project->path())->assertRedirect('login');
     }
 
     /** @test */
@@ -80,11 +80,23 @@ class ProjectsTest extends TestCase {
     
 
     /** @test */
-    public function a_user_can_view_a_project() {
+    public function a_user_can_view_their_project() {
         $this->withoutExceptionHandling();
-        $project = Project::factory('App\Project')->create();
+        $this->be(User::factory('App\User')->create());
+        $project = Project::factory('App\Project')->create(['owner_id' => auth()->id()]);
         $this->get($project->path())
             ->assertSee($project->title)
             ->assertSee($project->description);
     }
+
+
+    /** @test */
+    public function an_authenticated_user_cannot_view_the_projects_of_others() {
+        // $this->withoutExceptionHandling();
+        $this->be(User::factory('App\User')->create());
+        $project = Project::factory('App\Project')->create();
+        $this->get($project->path())->assertStatus(403);
+    }   
+
+
 }

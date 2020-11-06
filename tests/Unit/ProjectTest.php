@@ -7,6 +7,7 @@ use \Tests\Testcase as WOOHOO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Project;
+use App\Models\User;
 
 /*
 
@@ -31,16 +32,11 @@ class ProjectTest extends WOOHOO
         $this->assertEquals('/projects/' . $project->id, $project->path());
     }
 
-
-
     /** @test */
-    // public function it_has_a_path() {
-    //     $project = Project::factory('App\Project')->create();
-    //     dd($project);
-    //     // $this->assertEquals('/projects/' . $project->id, $project->path());
-    // }
-
-
-
+    public function it_belongs_to_an_owner() {
+        $project = Project::factory('App\Project')->create();
+        
+        $this->assertInstanceOf('App\Models\User', $project->owner);
+    }
 
 }
