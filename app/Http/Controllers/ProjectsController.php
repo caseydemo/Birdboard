@@ -24,10 +24,7 @@ class ProjectsController extends Controller
     public function show(Project $project) {
         // $project = Project::findOrFail(request('project')); // route model binding?
         
-        // LEFT OFF HERE 11/5/20 - 
-        dd(auth()->user); // cannot find 'user' ???
-
-        if(auth()->user->isNot($project->owner)) {
+        if(auth()->user()->isNot($project->owner)) {
             abort(403);
         }
 

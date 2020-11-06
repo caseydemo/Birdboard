@@ -8,7 +8,7 @@ use Tests\TestCase;
 use App\Models\Project;
 use App\Models\User;
 
-class ProjectsTest extends TestCase {
+class ManageProjectsTest extends TestCase {
 
     use RefreshDatabase, WithFaker;
     
