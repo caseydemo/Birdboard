@@ -14,25 +14,14 @@ class ManageProjectsTest extends TestCase {
     
     
     /** @test */
-    public function guests_cannot_create_projects() {
-        // this->withoutExceptionHandling();
-        $attributes = Project::factory('App\Project')->raw();
-        $this->post('/projects', $attributes)->assertRedirect('login');
+    public function guests_cannot_manage_projects() {    
+        $project = Project::factory('App\Project')->create();
+        $this->get('/projects')->assertRedirect('login');
+        $this->get($project->path())->assertRedirect('login');
+        $this->post('/projects', $project->toArray())->assertRedirect('login');
+        
     }
     
-    /** @test */
-    public function guests_cannot_view_projects() {
-        
-        $this->get('/projects')->assertRedirect('login');
-    }
-
-    // left off here 11/1
-
-    /** @test */
-    public function guests_cannot_view_a_single_project() {
-        $project = Project::factory('App\Project')->create();
-        $this->get($project->path())->assertRedirect('login');
-    }
 
     /** @test */
     public function a_user_can_create_a_project() {
@@ -42,6 +31,9 @@ class ManageProjectsTest extends TestCase {
         // Note - this was another workaround I figured out ON MY OWN 10/28/20
         $user = User::factory('App\User')->create(); // create user and store as variable
         $this->actingAs($user); // sign somebody in - using variable
+
+        $this->get('/projects/create')->assertStatus(200);
+
 
         // Note it was erroring out in the controller validation because in the video, we don't pass the owner_id in the attributes - so I passed it
         $attributes = [

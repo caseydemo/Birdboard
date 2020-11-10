@@ -31,18 +31,28 @@ class ProjectsController extends Controller
         return view('projects.show', compact('project'));
     }
 
+    /*
+    *
+    */
+    public function create() {
+        return view('projects.create');
+    }
+
+
     /**
      * 
      */
     public function store() {
 
         
+        
         // this is causing the error - 10/28/20
         $attributes = request()->validate([
             'title' => 'required', 
-            'description' => 'required',
-            'owner_id'  =>  'required'
+            'description' => 'required'
         ]);
+
+        dd($attributes);
 
         auth()->user()->projects()->create($attributes);
 
