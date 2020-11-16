@@ -43,20 +43,13 @@ class ProjectsController extends Controller
      * 
      */
     public function store() {
-
-        
-        
         // this is causing the error - 10/28/20
         $attributes = request()->validate([
             'title' => 'required', 
             'description' => 'required'
         ]);
 
-        dd($attributes);
-
         auth()->user()->projects()->create($attributes);
-
-        // Project::create($attributes);
         return redirect('/projects');
     }
 }
