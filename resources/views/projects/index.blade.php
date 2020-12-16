@@ -1,7 +1,11 @@
 <!-- start using layout file - 12/15/20 -->
 @extends('layouts.app')
 @section('content')
-<h1>Birdboard</h1>
+    <div style="display: flex; align-items:center;">
+        <h1 style="margin-right:auto;">Birdboard</h1>
+        <a href="/projects/create">New Project</a>
+    </div>
+    
     <ul>
         @forelse ($projects as $project)
             <li>
