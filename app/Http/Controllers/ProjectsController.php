@@ -52,8 +52,6 @@ class ProjectsController extends Controller
             'description' => 'required'
         ]);
 
-        dd($attributes);
-
         auth()->user()->projects()->create($attributes);
 
         // Project::create($attributes);
